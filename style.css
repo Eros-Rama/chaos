@@ -10,8 +10,9 @@ body {
     display: flex;
     width: 100vw;
     height: 100vh;
-    background-color: blue;
     justify-content: center;
+
+    background-color: blue; /* TODO: Remove, for testing */
 }
 
 .segment {
@@ -22,7 +23,8 @@ body {
 
 .game-canvas {
     aspect-ratio: 1/1;
-    background-color: cyan;
+
+    background-color: cyan; /* TODO: Remove, for testing */
 }
 
 @media (orientation: landscape) {
