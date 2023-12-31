@@ -50,9 +50,3 @@ body {
       height: 100%
   }
 }
-
-/* Initial game state */
-#builder {
-    display: none;
-}
-
