@@ -63,10 +63,9 @@ function drawGridClip(ctx, grid) {
         ctx.lineTo(ex, ey)
     }
 
-    ctx.closePath()
     ctx.stroke()
 
 }
 
 const ctx = enemyCanvas.getContext("2d")
-setTimeout(() => drawGridClip(ctx, {x: 0, y: 0, width: 100, height: 100, foreground: "black", background: "white", rows: 10, columns: 10, offset: 0, scale: 1}), 500)
+setTimeout(() => drawGridClip(ctx, {x: 0, y: 0, width: 100, height: 100, foreground: "black", background: "white", rows: 10, columns: 10, offset: -10, scale: 2}), 500)
