@@ -1,0 +1,27 @@
+[
+    { "id": "mana_crystal",
+        "sprite": "#0016C4",
+        "tags": ["mana_producer"],
+        "properties": { "hp": 1, "power": 0, "amount": 1 },
+        "cost": { "mana": 2 },
+        "actions":
+        {
+            "turn_end": { "action": "produce", "args": ["mana", "amount"] }
+        },
+        "synergies":
+        [
+            {
+                "effect": { "action": "increment", "args": ["amount"] },
+                "each":
+                {
+                    "constellation":
+                    {
+                        "neighborhood": "diamond-1",
+                        "tags": ["mana_producer"],
+                        "count": 1
+                    }
+                }
+            }
+        ]
+    }
+]
