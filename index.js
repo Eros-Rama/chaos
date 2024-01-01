@@ -7,6 +7,7 @@ const enemyCanvas = document.getElementById("enemy-canvas")
 function updateCanvasSize(canvas) {
     canvas.width = canvas.clientWidth
     canvas.height = canvas.clientHeight
+    render()
 }
 
 const resizeObserver = new ResizeObserver((entries) => {
@@ -36,7 +37,7 @@ function drawGridClip(ctx, grid) {
         const sx = grid.x + (row * rowWidth) + grid.offset
         const sy = grid.y + grid.offset
         const ex = sx
-        const ey = Math.min(sy + grid.height, grid.height)
+        const ey = Math.min(sy + grid.height, grid.height * grid.scale)
         if(sx > grid.width || sy > grid.height)
         {
             break
@@ -52,7 +53,7 @@ function drawGridClip(ctx, grid) {
     {
         const sx = grid.x + grid.offset
         const sy = grid.y + (column * columnHeight) + grid.offset
-        const ex = Math.min(sx + grid.width, grid.width)
+        const ex = Math.min(sx + grid.width, grid.width * grid.scale)
         const ey = sy
         if(sx > grid.width || sy > grid.height)
         {
@@ -67,5 +68,26 @@ function drawGridClip(ctx, grid) {
 
 }
 
+let testGrid = {
+    x: 0, y: 0, width: 100, height: 100,
+    foreground: "black", background: "white",
+    rows: 10, columns: 10,
+    offset: 0, scale: 1,
+    scrollFactor: 0.001
+}
 const ctx = enemyCanvas.getContext("2d")
-setTimeout(() => drawGridClip(ctx, {x: 0, y: 0, width: 100, height: 100, foreground: "black", background: "white", rows: 10, columns: 10, offset: -10, scale: 2}), 500)
+function render() {
+    testGrid.width = enemyCanvas.width
+    testGrid.height = enemyCanvas.height
+    drawGridClip(ctx, testGrid)
+}
+
+function scaleGrid(e) {
+    e.preventDefault()
+
+    testGrid.scale += e.deltaY * testGrid.scrollFactor
+    render()
+}
+
+console.log('adding event listener')
+enemyCanvas.addEventListener("wheel", scaleGrid, { passive: false })
