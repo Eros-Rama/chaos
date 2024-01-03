@@ -32,6 +32,11 @@ function render() {
     //TODO: Why do these get reset randomly? Is it because of the canvas dimension changes?
     ctx.fillStyle = 'white'
     ctx.strokeStyle = 'black'
+    //FIXME: Visual glitch at the very border of grid, black dots and stuttering
+    //as well as leaving a thin black smudge where they once were. Probably
+    //related to floating point errors. The clamp function is suspect for causing
+    //them. Gets fixed on a drastic enough resize. Can be hidden with an
+    //explicit grid border. Old code did not have this glitch
     ctx.fillRect(grid.x, grid.y, grid.width, grid.height)
 
     grid.render(ctx)
