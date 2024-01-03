@@ -123,8 +123,8 @@ export default class Grid extends EventTarget {
         let curX = this.startX
         for(let row = 0; row <= this.#rows; row++, curX += this.#cellWidth)
         {
-            if(curX < Math.floor(this.#x)) continue;
-            if(curX > Math.ceil(maxX)) continue;
+            if(curX < this.#x) continue;
+            if(curX > maxX) continue;
 
             ctx.moveTo(curX, rowSY)
             ctx.lineTo(curX, rowEY)
@@ -136,8 +136,8 @@ export default class Grid extends EventTarget {
         let curY = this.startY
         for(let column = 0; column <= this.columns; column++, curY += this.#cellHeight)
         {
-            if(curY < Math.floor(this.#y)) continue;
-            if(curY > Math.ceil(maxY)) continue;
+            if(curY < this.#y) continue;
+            if(curY > maxY) continue;
 
             ctx.moveTo(columnSX, curY)
             ctx.lineTo(columnEX, curY)
