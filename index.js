@@ -48,6 +48,7 @@ enemyCanvas.addEventListener("wheel", scaleGrid, { passive: false })
 let mouseDown = false;
 enemyCanvas.addEventListener("mousedown", (e) => mouseDown = true, { passive: true })
 enemyCanvas.addEventListener("mouseup", (e) => mouseDown = false, { passive: true })
+enemyCanvas.addEventListener("mouseleave", (e) => mouseDown = false, { passive: true })
 
 function offsetGrid(e) {
     e.preventDefault()
