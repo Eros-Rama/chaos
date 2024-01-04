@@ -120,7 +120,7 @@ export default class Grid extends EventTarget {
         const rowSY = clamp(this.#y, this.#startY, maxY)
         const rowEY = clamp(this.#y, this.#startY + this.#trueHeight, maxY)
 
-        let curX = this.startX
+        let curX = this.#startX
         for(let row = 0; row <= this.#rows; row++, curX += this.#cellWidth)
         {
             if(curX < this.#x) continue;
@@ -133,7 +133,7 @@ export default class Grid extends EventTarget {
         const columnSX = clamp(this.#x, this.startX, maxX)
         const columnEX = clamp(this.#x, this.startX + this.#trueWidth, maxX)
 
-        let curY = this.startY
+        let curY = this.#startY
         for(let column = 0; column <= this.columns; column++, curY += this.#cellHeight)
         {
             if(curY < this.#y) continue;
