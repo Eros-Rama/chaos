@@ -11,7 +11,9 @@ const ctx = enemyCanvas.getContext("2d")
 function updateCanvasSize(canvas) {
     canvas.width = canvas.clientWidth
     canvas.height = canvas.clientHeight
-    render()
+
+    //TODO: Not final, move to more appropriate spot
+    grid.translate(enemyCanvas.width / 4, enemyCanvas.height / 4, enemyCanvas.width / 2, enemyCanvas.height / 2)
 }
 
 const resizeObserver = new ResizeObserver((entries) => {
@@ -25,10 +27,9 @@ resizeObserver.observe(neutralCanvas)
 resizeObserver.observe(enemyCanvas)
 
 let grid = new Grid(10, 10, enemyCanvas.width / 2, enemyCanvas.height / 2, enemyCanvas.width / 4, enemyCanvas.height / 4)
+grid.addEventListener("needrender", (e) => render(), { passive: true })
 
 function render() {
-    grid.translate(enemyCanvas.width / 4, enemyCanvas.height / 4, enemyCanvas.width / 2, enemyCanvas.height / 2)
-
     //TODO: Why do these get reset randomly? Is it because of the canvas dimension changes?
     ctx.fillStyle = 'white'
     ctx.strokeStyle = 'black'
@@ -41,7 +42,6 @@ function scaleGrid(e) {
     e.preventDefault()
 
     grid.scale -= e.deltaY * 0.001
-    render()
 }
 enemyCanvas.addEventListener("wheel", scaleGrid, { passive: false })
 
@@ -55,7 +55,6 @@ function offsetGrid(e) {
 
     if(mouseDown) {
         grid.offset(grid.offsetX + e.movementX, grid.offsetY + e.movementY)
-        render()
     }
 }
 enemyCanvas.addEventListener("mousemove", offsetGrid, { passive: false })
