@@ -76,6 +76,7 @@ export default class Grid extends EventTarget {
         this.#trueHeight = Grid.calculateTrueHeight(this.#cellHeight, this.#columns)
 
         this.dispatchEvent(new CustomEvent('translate', { detail: {grid: this, old: old} }))
+        this.dispatchEvent(new CustomEvent('needrender', { detail: {grid: this, cause: "Translation"} }))
 
     }
     set scale(scale) {
@@ -90,6 +91,7 @@ export default class Grid extends EventTarget {
         this.#trueHeight = Grid.calculateTrueHeight(this.#cellHeight, this.#columns)
 
         this.dispatchEvent(new CustomEvent('scale', { detail: {grid: this, old: old} }))
+        this.dispatchEvent(new CustomEvent('needrender', { detail: {grid: this, cause: "Scaling"} }))
 
     }
     offset(offsetX, offsetY) {
@@ -102,6 +104,7 @@ export default class Grid extends EventTarget {
         this.#startY = Grid.calculateStartY(this.#y, this.#offsetY)
 
         this.dispatchEvent(new CustomEvent('offset', { detail: {grid: this, old: old} }))
+        this.dispatchEvent(new CustomEvent('needrender', { detail: {grid: this, cause: "Offseting"} }))
 
     }
 
