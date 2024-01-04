@@ -30,6 +30,9 @@ let grid = new Grid(10, 10, enemyCanvas.width / 2, enemyCanvas.height / 2, enemy
 grid.addEventListener("needrender", (e) => render(), { passive: true })
 
 function render() {
+    ctx.fillStyle = 'cyan'
+    ctx.fillRect(0, 0, enemyCanvas.width, enemyCanvas.height)
+
     //TODO: Why do these get reset randomly? Is it because of the canvas dimension changes?
     ctx.fillStyle = 'white'
     ctx.strokeStyle = 'black'
