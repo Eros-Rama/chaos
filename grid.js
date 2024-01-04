@@ -152,6 +152,13 @@ export default class Grid extends EventTarget {
 
     }
 
+    coordsToRowsAndColumns(x, y) {
+        const distanceX = x - this.#startX
+        const distanceY = y - this.#startY
+
+        return { row: Math.floor(distanceX / this.#cellWidth), column: Math.floor(distanceY / this.#cellHeight) }
+    }
+
 }
 
 function clamp(min, val, max) {
