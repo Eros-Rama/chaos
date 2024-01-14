@@ -158,6 +158,12 @@ export default class Grid extends EventTarget {
 
         return { row: Math.floor(distanceX / this.#cellWidth), column: Math.floor(distanceY / this.#cellHeight) }
     }
+    rowsAndColumnsToCoords(row: number, column: number) {
+        const widths = this.#cellWidth * row
+        const heights = this.#cellHeight * column
+
+        return { x: this.#startX + widths, y: this.#startY + heights }
+    }
 
 }
 
