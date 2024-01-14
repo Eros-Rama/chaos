@@ -21,7 +21,7 @@ export default class Grid extends EventTarget {
     get trueWidth() { return this.#trueWidth }
     get trueHeight() { return this.#trueHeight }
 
-    constructor(rows, columns, x, y, width, height, scale=1, offsetX=0, offsetY=0) {
+    constructor(rows: number, columns: number, x: number, y: number, width: number, height: number, scale=1, offsetX=0, offsetY=0) {
         super();
 
         this.#rows = rows
@@ -45,21 +45,21 @@ export default class Grid extends EventTarget {
 
     }
 
-    static calculateStartX(x, offsetX) { return x + offsetX }
-    static calculateStartY(y, offsetY) { return y + offsetY }
+    static calculateStartX(x: number, offsetX: number) { return x + offsetX }
+    static calculateStartY(y: number, offsetY: number) { return y + offsetY }
 
-    static calculateEndX(x, width, offsetX) { return x + width + offsetX }
-    static calculateEndY(y, height, offsetY) { return y + height + offsetY }
+    static calculateEndX(x: number, width: number, offsetX: number) { return x + width + offsetX }
+    static calculateEndY(y: number, height: number, offsetY: number) { return y + height + offsetY }
 
-    static calculateCellWidth(rows, width, scale) { return width / rows * scale }
-    static calculateCellHeight(columns, height, scale) { return height / columns * scale }
+    static calculateCellWidth(rows: number, width: number, scale: number) { return width / rows * scale }
+    static calculateCellHeight(columns: number, height: number, scale: number) { return height / columns * scale }
 
-    static calculateTrueWidth(cellWidth, rows) { return cellWidth * rows }
-    static calculateTrueHeight(cellHeight, columns) { return cellHeight * columns }
+    static calculateTrueWidth(cellWidth: number, rows: number) { return cellWidth * rows }
+    static calculateTrueHeight(cellHeight: number, columns: number) { return cellHeight * columns }
 
-    translate(x, y, width, height) {
+    translate(x: number, y: number, width: number, height: number) {
 
-        let old = { x: this.#x, y: this.#y, width: this.#width, height: this.#height }
+        const old = { x: this.#x, y: this.#y, width: this.#width, height: this.#height }
 
         this.#x = x
         this.#y = y
@@ -79,8 +79,8 @@ export default class Grid extends EventTarget {
         this.dispatchEvent(new CustomEvent('needrender', { detail: {grid: this, cause: "Translation"} }))
 
     }
-    set scale(scale) {
-        let old = this.#scale
+    set scale(scale: number) {
+        const old = this.#scale
 
         this.#scale = scale
 
@@ -94,8 +94,8 @@ export default class Grid extends EventTarget {
         this.dispatchEvent(new CustomEvent('needrender', { detail: {grid: this, cause: "Scaling"} }))
 
     }
-    offset(offsetX, offsetY) {
-        let old = { offsetX: this.#offsetX, offsetY: this.offsetY }
+    offset(offsetX: number, offsetY: number) {
+        const old = { offsetX: this.#offsetX, offsetY: this.offsetY }
 
         this.#offsetX = offsetX
         this.#offsetY = offsetY
@@ -108,7 +108,7 @@ export default class Grid extends EventTarget {
 
     }
 
-    render(ctx) {
+    render(ctx: CanvasRenderingContext2D) {
         if(
             !this.dispatchEvent(new CustomEvent(
                 'prerender', { detail: {grid: this}, cancelable: true })
@@ -152,7 +152,7 @@ export default class Grid extends EventTarget {
 
     }
 
-    coordsToRowsAndColumns(x, y) {
+    coordsToRowsAndColumns(x: number, y: number) {
         const distanceX = x - this.#startX
         const distanceY = y - this.#startY
 
@@ -161,8 +161,8 @@ export default class Grid extends EventTarget {
 
 }
 
-function clamp(min, val, max) {
+function clamp(min: number, val: number, max: number) {
     if(val < min) return min;
-    else if(val > max) return max;
-    else return val;
+    if(val > max) return max;
+    return val;
 }
