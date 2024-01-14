@@ -1,4 +1,4 @@
-import Grid from "./grid.js"
+import Grid from "./src/grid.js"
 
 console.log("Game script start")
 
