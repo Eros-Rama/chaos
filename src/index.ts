@@ -1,14 +1,14 @@
-import Grid from "./src/grid.js"
+import Grid from "./grid"
 
 console.log("Game script start")
 
-const friendlyCanvas = document.getElementById("friendly-canvas")
-const neutralCanvas = document.getElementById("neutral-canvas")
-const enemyCanvas = document.getElementById("enemy-canvas")
+const friendlyCanvas = document.getElementById("friendly-canvas") as HTMLCanvasElement
+const neutralCanvas = document.getElementById("neutral-canvas") as HTMLCanvasElement
+const enemyCanvas = document.getElementById("enemy-canvas") as HTMLCanvasElement
 
-const ctx = enemyCanvas.getContext("2d")
+const ctx = enemyCanvas.getContext("2d") as CanvasRenderingContext2D
 
-function updateCanvasSize(canvas) {
+function updateCanvasSize(canvas: HTMLCanvasElement) {
     canvas.width = canvas.clientWidth
     canvas.height = canvas.clientHeight
 
@@ -18,7 +18,7 @@ function updateCanvasSize(canvas) {
 
 const resizeObserver = new ResizeObserver((entries) => {
     for(const entry of entries) {
-        updateCanvasSize(entry.target)
+        updateCanvasSize(entry.target as HTMLCanvasElement)
     }
 });
 
@@ -30,9 +30,9 @@ const rows = 10
 const columns = 10
 
 const grid = new Grid(rows, columns, enemyCanvas.width / 2, enemyCanvas.height / 2, enemyCanvas.width / 4, enemyCanvas.height / 4)
-grid.addEventListener("needrender", (e) => render(), { passive: true })
+grid.addEventListener("needrender", (_) => render(), { passive: true })
 
-const gridTiles = Array(10).fill(0).map(x => Array(10).fill("white"))
+const gridTiles = Array(10).fill(0).map(_ => Array(10).fill("white"))
 
 function render() {
     ctx.fillStyle = 'cyan'
@@ -56,7 +56,7 @@ function render() {
 
 }
 
-function scaleGrid(e) {
+function scaleGrid(e: WheelEvent) {
     e.preventDefault()
 
     grid.scale -= e.deltaY * 0.001
@@ -77,10 +77,10 @@ enemyCanvas.addEventListener("mousedown", (e) => {
 
     render()
 }, { passive: true })
-enemyCanvas.addEventListener("mouseup", (e) => { mouseDown = false }, { passive: true })
-enemyCanvas.addEventListener("mouseleave", (e) => { mouseDown = false }, { passive: true })
+enemyCanvas.addEventListener("mouseup", (_) => { mouseDown = false }, { passive: true })
+enemyCanvas.addEventListener("mouseleave", (_) => { mouseDown = false }, { passive: true })
 
-function offsetGrid(e) {
+function offsetGrid(e: MouseEvent) {
     e.preventDefault()
 
     if(mouseDown) {

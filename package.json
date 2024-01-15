@@ -4,6 +4,9 @@
   "private": true,
   "author": "ChaosInventor <chaosinventor@yandex.com>",
   "license": "GPL-3.0-or-later",
+  "scripts": {
+      "build": "webpack"
+  },
   "devDependencies": {
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
