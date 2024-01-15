@@ -1,7 +1,7 @@
 {
   "name": "AetherWars",
   "version": "0.0.1",
-  "main": "index.js",
+  "private": true,
   "author": "ChaosInventor <chaosinventor@yandex.com>",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
