@@ -57,6 +57,22 @@ export default class Grid extends EventTarget {
     static calculateTrueWidth(cellWidth: number, rows: number) { return cellWidth * rows }
     static calculateTrueHeight(cellHeight: number, columns: number) { return cellHeight * columns }
 
+    resize(rows: number, columns: number) {
+        const old = { rows: this.#rows, columns: this.#columns }
+
+        this.#rows = rows
+        this.#columns = columns
+
+        this.#cellWidth = Grid.calculateCellWidth(this.#rows, this.#width, this.#scale)
+        this.#cellHeight = Grid.calculateCellHeight(this.#columns, this.#height, this.#scale)
+
+        this.#trueWidth = Grid.calculateTrueWidth(this.#cellWidth, this.#rows)
+        this.#trueHeight = Grid.calculateTrueHeight(this.#cellHeight, this.#columns)
+
+        this.dispatchEvent(new CustomEvent('resize', { detail: {grid: this, old: old} }))
+        this.dispatchEvent(new CustomEvent('needrender', { detail: {grid: this, cause: "Resizing"} }))
+
+    }
     translate(x: number, y: number, width: number, height: number) {
 
         const old = { x: this.#x, y: this.#y, width: this.#width, height: this.#height }
