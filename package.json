@@ -5,6 +5,9 @@
   "author": "ChaosInventor <chaosinventor@yandex.com>",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "typescript": "^5.3.3"
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   }
 }
