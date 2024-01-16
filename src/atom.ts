@@ -1,49 +1,47 @@
-export default interface Atom {
+import { Tags, TagAssociation, applyTagAssociation } from './tags'
+import { Properties } from './properties'
+import { Cost } from './cost'
+import { Actions } from './action'
+import { Synergies } from './synergy'
+
+export type AtomStore = Map<string, Atom>;
+
+export interface Atom {
     id: string;
+    name: string;
+    description: string;
     sprite: string;
-    tags: Set<string>;
-    properties: Map<KnownProperties | string, any>;
-    cost: Map<string, number>;
-    actions: Map<KnownActions, Effect>;
-    synergies: Array<Synergy>;
-}
+    tags: Tags;
+    properties: Properties;
+    cost: Cost
+    actions: Actions;
+    synergies: Synergies;
+};
 
-export enum KnownProperties {
-    hp = "hp",
-    power = "power",
-}
+export function buildAtomStore(atoms: Set<Atom>, tags: TagAssociation): { store: AtomStore, duplicates: Map<string, Array<Atom>> } {
+    const store = new Map<string, Atom>();
+    const duplicates = new Map<string, Array<Atom>>();
 
-export enum KnownActions {
-    turnStart = "turn_start",
-    turnEnd = "turn_end",
-}
+    for(const atom of atoms) {
+        applyTagAssociation(atom.tags, tags);
 
-export interface Effect {
-    action: Action,
-    args: Array<string>
-}
+        if(store.has(atom.id)) {
+            let duplicatesArray = duplicates.get(atom.id)
+            if(!duplicatesArray) {
+                duplicatesArray = new Array<Atom>();
+                duplicates.set(atom.id, duplicatesArray);
+            }
 
-export enum Action {
-    increment = "increment",
-    decrement = "decrement",
-    add = "add",
-    subtract = "subtract",
-    multiply = "multiply",
-    divide = "divide",
-    modulo = "modulo",
-}
+            duplicatesArray.push(atom)
+        }
+        else {
+            store.set(atom.id, atom);
+        }
+    }
 
-export interface Synergy {
-    effect: Effect;
-    each: Condition;
-}
+    for(const [key, _] of duplicates) {
+        store.delete(key);
+    }
 
-export interface Condition {
-    constellation?: Constellation;
-}
-
-export interface Constellation {
-    neightbourhood?: Array<Array<number>> | string;
-    tags?: Set<string>;
-    count?: number;
+    return { store, duplicates };
 }
