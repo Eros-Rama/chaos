@@ -3,20 +3,24 @@
 <html>
 
     <head>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=0.1, user-scalable=no" />
+
         <link rel="stylesheet" href="style.css"></link>
         <title>Game</title>
     </head>
 
     <body>
         <div id="root">
-            <div id="friendly" class="segment">
-                <canvas id="friendly-canvas" class="game-canvas"></canvas>
-            </div>
-            <div id="neutral" class="segment">
-                <canvas id="neutral-canvas" class="game-canvas"></canvas>
-            </div>
-            <div id="enemy" class="segment">
-                <canvas id="enemy-canvas" class="game-canvas"></canvas>
+            <div id="game-ui">
+                <div id="friendly" class="game-ui-segment">
+                    <canvas id="friendly-canvas" class="game-canvas"></canvas>
+                </div>
+                <div id="neutral" class="game-ui-segment">
+                    <canvas id="neutral-canvas" class="game-canvas"></canvas>
+                </div>
+                <div id="enemy" class="game-ui-segment">
+                    <canvas id="enemy-canvas" class="game-canvas"></canvas>
+                </div>
             </div>
         </div>
 
@@ -24,4 +28,3 @@
     </body>
 
 </html>
-
