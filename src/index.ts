@@ -6,6 +6,10 @@ const friendlyCanvas = document.getElementById("friendly-canvas") as HTMLCanvasE
 const neutralCanvas = document.getElementById("neutral-canvas") as HTMLCanvasElement
 const enemyCanvas = document.getElementById("enemy-canvas") as HTMLCanvasElement
 
+const friendlyOverlay = document.getElementById("friendly-overlay") as HTMLDivElement
+const neutralOverlay = document.getElementById("neutral-overlay") as HTMLDivElement
+const enemyOverlay = document.getElementById("enemy-overlay") as HTMLDivElement
+
 const ctx = enemyCanvas.getContext("2d") as CanvasRenderingContext2D
 
 function updateCanvasSize(canvas: HTMLCanvasElement) {
@@ -61,10 +65,10 @@ function scaleGrid(e: WheelEvent) {
 
     grid.scale -= e.deltaY * 0.001
 }
-enemyCanvas.addEventListener("wheel", scaleGrid, { passive: false })
+enemyOverlay.addEventListener("wheel", scaleGrid, { passive: false })
 
 let mouseDown = false;
-enemyCanvas.addEventListener("mousedown", (e) => {
+enemyOverlay.addEventListener("mousedown", (e) => {
     mouseDown = true
 
     const coords = grid.coordsToRowsAndColumns(e.offsetX, e.offsetY)
@@ -77,8 +81,8 @@ enemyCanvas.addEventListener("mousedown", (e) => {
 
     render()
 }, { passive: true })
-enemyCanvas.addEventListener("mouseup", (_) => { mouseDown = false }, { passive: true })
-enemyCanvas.addEventListener("mouseleave", (_) => { mouseDown = false }, { passive: true })
+enemyOverlay.addEventListener("mouseup", (_) => { mouseDown = false }, { passive: true })
+enemyOverlay.addEventListener("mouseleave", (_) => { mouseDown = false }, { passive: true })
 
 function offsetGrid(e: MouseEvent) {
     e.preventDefault()
@@ -87,5 +91,5 @@ function offsetGrid(e: MouseEvent) {
         grid.offset(grid.offsetX + e.movementX, grid.offsetY + e.movementY)
     }
 }
-enemyCanvas.addEventListener("mousemove", offsetGrid, { passive: false })
+enemyOverlay.addEventListener("mousemove", offsetGrid, { passive: false })
 

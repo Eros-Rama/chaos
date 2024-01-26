@@ -24,10 +24,6 @@ body {
     justify-content: center;
 }
 
-.game-ui-segment {
-    position: relative;
-}
-
 @media (orientation: landscape) {
   #game-ui {
     flex-direction: row;
@@ -48,10 +44,21 @@ body {
   }
 }
 
+.game-ui-segment {
+    position: relative;
+}
+
 .game-canvas {
+    position: absolute;
     width: 100%;
     height: 100%;
 
     background-color: cyan; /* TODO: Remove, for testing */
+}
+
+.canvas-overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
