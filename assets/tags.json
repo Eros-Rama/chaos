@@ -1,3 +1,5 @@
 {
-    "mana_producer": ["producer", "mana"]
+    "mana_producer": ["producer", "mana"],
+    "mana_pylon": ["pylon", "mana"],
+    "mana_wall": ["wall", "mana"]
 }
